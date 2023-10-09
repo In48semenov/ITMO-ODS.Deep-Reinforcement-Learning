@@ -187,7 +187,6 @@ def get_trajectory(
 ITERATION_N = 25
 TRAJECTORY_N = 500
 DETERMINISTIC_POLICY_N = 100
-# Траекторий, которые дойдут до финиша мало => q можно брать большим
 Q_PARAM = 0.3
 LAPLACE_SMOOTHING = False
 POLICY_SMOOTHING = True

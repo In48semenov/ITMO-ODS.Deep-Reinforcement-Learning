@@ -159,7 +159,6 @@ def get_trajectory(
 # MODEL PARAMETERS
 ITERATION_N = 25
 TRAJECTORY_N = 500
-# Траекторий, которые дойдут до финиша мало => q можно брать большим
 Q_PARAM = 0.6
 LAPLACE_SMOOTHING = False
 POLICY_SMOOTHING = True
