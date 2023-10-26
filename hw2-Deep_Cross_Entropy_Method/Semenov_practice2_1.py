@@ -1,9 +1,17 @@
+import sys
+sys.path.append("../")
+
 from typing import Dict, List, Union
 
 import gym
 import numpy as np
 import torch 
 import torch.nn as nn
+
+from hw.utils.clearml_manager import Manager
+
+# CLEAR-ML PARAMETERS
+PROJECT_NAME = "RL.DeepCEM"
 
 
 class CEM(nn.Module):
@@ -65,7 +73,7 @@ class CEM(nn.Module):
 
         if return_loss:
             return loss.item()
-
+        
     
 def get_trajectory(
     env,
@@ -112,17 +120,30 @@ def get_elite_trajectories(trajectories, q_param) -> List[Dict[str, Union[int, n
     return [trajectory for trajectory in trajectories if trajectory["total_reward"] > quantile]
 
 
-
 env = gym.make('Acrobot-v1')
 state_dim = 6
 action_n = 3
 lr = 1e-2
 
-agent = CEM(state_dim, action_n, lr)
-episode_n = 30
+episode_n = 70
 trajectory_n = 50
 trajectory_len = 500  # v1: 500; v0: 200
 q_param = 0.6
+
+TASK_NAME = f"Task-Acrobot-1-v10"
+manager = Manager(project=PROJECT_NAME, task_name=TASK_NAME)
+manager.log_params(
+    {
+        "Episode_n": episode_n,
+        "Trajectory_n": trajectory_n,
+        "Trajectory_len": trajectory_len,
+        "Q_param": q_param,
+        "Learning rate": lr,
+        "Loss": "CrossEntropyLoss"
+    }
+)
+
+agent = CEM(state_dim, action_n, lr)
 
 for episode in range(episode_n):
     trajectories = [get_trajectory(env, agent, trajectory_len) for _ in range(trajectory_n)]
@@ -136,7 +157,19 @@ for episode in range(episode_n):
         loss = agent.update_policy(elite_trajectories, return_loss=True)
         log += f', loss = {loss}'
 
+    manager.report_metrics(
+        "Training reward", "Mean Total Reward", mean_total_reward, episode
+    )
+    manager.report_metrics(
+        "Training Loss", "Loss", loss, episode
+    )
     print(log)
         
 trajectories = get_trajectory(env, agent, trajectory_len, visualize=True)
+
+manager.report_metrics(
+    "Test", "Total reward", trajectories['total_reward'], iteration=0
+)
 print(f"Total reward: {trajectories['total_reward']}")
+manager.task.close()
+
