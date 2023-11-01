@@ -100,7 +100,6 @@ def get_trajectory(
     max_len: int = 10000,
     visualize: bool = False,
     episode: int = None,
-    train: bool = False
 ) -> Dict[str, Union[np.ndarray, int, float]]:
     trajectory = {
         "states": [],

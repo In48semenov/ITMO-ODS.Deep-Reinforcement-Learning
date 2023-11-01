@@ -40,13 +40,6 @@ class CEM(nn.Module):
         state = torch.FloatTensor(state)
         logits = self.forward(state) 
         action_probs = self.softmax(logits).detach().numpy()
-        
-        # if num_iterations is not None:
-        #     action_probs = self.softmax(
-        #         (1 - self.eps) * action_probs + self.eps * torch.ones(self.action_n) / self.action_n
-        #     ).numpy()
-        #     self.eps /= num_iterations
-        
         action = np.random.choice(self.action_n, p=action_probs)
         return action
     
@@ -80,7 +73,6 @@ def get_trajectory(
     agent,
     max_len: int = 10000,
     visualize: bool = False,
-    num_iterations: Union[int, None] = None,
 ) -> Dict[str, Union[np.ndarray, int, float]]:
     trajectory = {
         "states": [],
