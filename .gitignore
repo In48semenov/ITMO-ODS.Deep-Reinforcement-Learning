@@ -2,4 +2,6 @@
 utils/clearml.env
 
 .idea/
-.venv-hw1/
+.venv/
+*.DS_Store
+*__pycache__/
