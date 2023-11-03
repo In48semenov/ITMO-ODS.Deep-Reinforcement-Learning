@@ -78,7 +78,7 @@ GAMMA += [np.round(gamma, 3) for gamma in np.linspace(0.901, 1, 100)]
 COUNT_RUN_ENV = 1000
 COUNT_EPISODE = 1000
 
-TASK_NAME = "Value_Iteration"
+TASK_NAME = "Value_Iteration_v2"
 manager = Manager(project=PROJECT_NAME, task_name=TASK_NAME)
 
 mean_rewards = []
@@ -165,10 +165,10 @@ for idx in range(COUNT_EPISODE):
         break
 
 manager.report_metrics(
-    f"Gamma-Reward-Test (GAMMA: {best_gamma} with min Access to ENV)", "Reward", total_reward, 0
+    f"Gamma-Reward-Test (GAMMA: {best_access_gamma} with min Access to ENV)", "Reward", total_reward, 0
 )
 manager.report_metrics(
-    f"Access-to-Environment-Test (GAMMA: {best_gamma} with min Access to ENV)", "Access", idx, 0
+    f"Access-to-Environment-Test (GAMMA: {best_access_gamma} with min Access to ENV)", "Access", idx, 0
 )
 
 manager.task.close()

@@ -45,17 +45,14 @@ def init_v_values():
 
 def policy_evaluation_step(v_values, policy, gamma):
     q_values = get_q_values(v_values, gamma)
-    # new_v_values = init_v_values()
-    new_v_values = v_values.copy()
+    new_v_values = init_v_values()
     for state in env.get_all_states():
-        new_v_values[state] = 0
         for action in env.get_possible_actions(state):
             new_v_values[state] += policy[state][action] * q_values[state][action]
     return new_v_values
 
 
 def policy_evaluation(policy, v_values, gamma, eval_iter_n):
-    # v_values = init_v_values()
     for _ in range(eval_iter_n):
         v_values = policy_evaluation_step(v_values, policy, gamma)
     q_values = get_q_values(v_values, gamma)
