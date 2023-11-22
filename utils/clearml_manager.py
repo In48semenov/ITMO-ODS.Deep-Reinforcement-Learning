@@ -43,5 +43,10 @@ class Manager:
             iteration=iteration
         )
 
+    def report_plot(self, title: str, series: str, plt) -> None:
+        self.logger.report_matplotlib_figure(
+            title=title, series=series, iteration=0, figure=plt
+        )
+
     def close_task(self, ):
         self.task.close()
