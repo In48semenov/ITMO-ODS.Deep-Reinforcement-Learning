@@ -7,3 +7,4 @@ utils/clearml.env
 *__pycache__/
 
 *.ipynb
+*.png
