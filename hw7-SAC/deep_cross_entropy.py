@@ -16,9 +16,9 @@ class DeepCEM(nn.Module):
         self.eps = 1
 
         self.network = nn.Sequential(
-            nn.Sequential(nn.Linear(state_dim, 64), nn.ReLU(),
+            nn.Linear(state_dim, 64), nn.ReLU(),
             nn.Linear(64, 64), nn.ReLU(),
-            nn.Linear(64, self.action_n), nn.Softmax(dim=0))
+            nn.Linear(64, self.action_n), nn.Softmax(dim=0)
         )
 
         self.softmax = nn.Softmax(dim=0)

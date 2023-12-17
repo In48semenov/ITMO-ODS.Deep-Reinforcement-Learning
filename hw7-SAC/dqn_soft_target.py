@@ -32,7 +32,7 @@ class DQNSoftTargetUpdate:
         lr=1e-3, 
         batch_size=64, 
         epsilon_decrease=0.01, 
-        epilon_min=0.01,
+        epsilon_min=0.01,
         tau: float = 0.01,
     ):
         self.state_dim = state_dim
@@ -45,7 +45,7 @@ class DQNSoftTargetUpdate:
         self.batch_size = batch_size
         self.epsilon = 1
         self.epsilon_decrease = epsilon_decrease
-        self.epilon_min = epilon_min
+        self.epsilon_min = epsilon_min
         self.memory = []
         self.optimzaer = torch.optim.Adam(self.q_function.parameters(), lr=lr)
 
@@ -90,7 +90,7 @@ class DQNSoftTargetUpdate:
 
             self._mix_weights()
             
-            if self.epsilon > self.epilon_min:
+            if self.epsilon > self.epsilon_min:
                 self.epsilon -= self.epsilon_decrease
 
     def fit(self, env, episode_n, t_max: int=500) -> List[float]:

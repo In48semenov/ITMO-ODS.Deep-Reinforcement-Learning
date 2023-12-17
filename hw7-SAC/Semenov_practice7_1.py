@@ -34,7 +34,7 @@ REPEATS_N = 3
 
 ALGORITHM_PARAMETERS = {
     "Deep-Cross-Entropy": dict(lr=LR, q_param=0.8),
-    "DQN-Soft-Target-Update": dict(gamma=GAMMA, lr=LR, batch_size=BATCH_SIZE, epsilon_decrease=0.01, epilon_min=0.01, tau=TAU),
+    "DQN-Soft-Target-Update": dict(gamma=GAMMA, lr=LR, batch_size=BATCH_SIZE, epsilon_decrease=0.01, espilon_min=0.01, tau=TAU),
     "PPO": dict(epsilon=0.2, gamma=GAMMA, epoch_n=100, pi_lr=LR, v_lr=5e-2, batch_size=BATCH_SIZE),
     "SAC": dict(gamma=GAMMA, alpha=1e-3, tau=TAU, batch_size=BATCH_SIZE, pi_lr=LR, q_lr=5e-4, temperature=1),
 }
