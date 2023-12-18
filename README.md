@@ -1,4 +1,4 @@
- Homework for the [Deep Reiforcement Learning](https://ods.ai/tracks/drlcourse23) course within the Master's program "Machine Learning Engineering"
+ Homework for the [Deep Reinforcement Learning](https://ods.ai/tracks/drlcourse23) course within the Master's program "Machine Learning Engineering"
 
  - [hw-1 Cross Entropy Method](./hw1-Cross_Entropy_Method)
  - [hw-2 Deep Cross Entropy Method](./hw2-Deep_Cross_Entropy_Method)
